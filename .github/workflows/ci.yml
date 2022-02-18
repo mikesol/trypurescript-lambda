@@ -43,7 +43,7 @@ jobs:
           # push it to ECR so that it can
           # be deployed to ECS.
           npm install aws
-          docker build --verbose -t wags-lambda .
+          docker build -t wags-lambda .
           docker tag wags-lambda:latest 201242457561.dkr.ecr.eu-west-1.amazonaws.com/wags-lambda:latest
           aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 201242457561.dkr.ecr.eu-west-1.amazonaws.com
           docker push 201242457561.dkr.ecr.eu-west-1.amazonaws.com/wags-lambda:latest
