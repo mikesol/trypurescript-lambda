@@ -20,7 +20,7 @@ RUN tar zxf linux-x86_64.tar.gz
 
 RUN cp stack-2.7.3-linux-x86_64/stack /usr/bin
 
-RUN yum -y install perl make automake gcc gmp-devel libffi zlib zlib-devel xz tar git gnupg
+RUN yum -y install perl make automake gcc gmp-devel libffi zlib zlib-devel xz tar git gnupg python3
 
 # Installing Haskell Stack
 RUN curl -sSL https://get.haskellstack.org/ | sh
@@ -34,6 +34,10 @@ RUN cd /root/lambda-function
 WORKDIR /root/lambda-function/
 
 RUN ls
+
+RUN cd staging && npm install && npx spago build --purs-args "-g corefn" && cd ..
+
+RUN python3 gen_externs_array.py
 
 RUN stack clean --full
 RUN stack build
@@ -62,5 +66,6 @@ COPY --from=build ${OUTPUT_DIR} .
 RUN ls
 RUN mv ${EXECUTABLE_NAME} bootstrap || true
 RUN ls
+RUN yum remove python3
 
 CMD [ "handler" ]

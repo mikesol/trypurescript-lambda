@@ -1,3 +1,5 @@
 .stack-work/
 build/
 *~
+trypurescript-lambda.cabal
+src/Externs.hs
