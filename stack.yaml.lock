@@ -99,6 +99,13 @@ packages:
       sha256: 7885e347934c02f98e54bd39880c29f697bf268afab0038faa4bc575d0bc7f23
   original:
     hackage: Glob-0.10.1
+- completed:
+    hackage: filepath-1.4.2.1@sha256:aff13ab4dd895931e77c22756e6e4e7bc8189351e0fa48270a998b826a63f54a,2291
+    pantry-tree:
+      size: 681
+      sha256: ed5ffa1e42c2626fc3b13b9f7ff3fef6b841515a57021819f8066db4e93264dc
+  original:
+    hackage: filepath-1.4.2.1
 snapshots:
 - completed:
     size: 565712

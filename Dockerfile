@@ -38,7 +38,6 @@ RUN ls
 RUN cd staging && npm install && npx spago build --purs-args "-g corefn" && cd ..
 
 RUN python3 gen_externs_array.py
-
 RUN stack clean --full
 RUN stack build
 
@@ -62,10 +61,10 @@ WORKDIR ${LAMBDA_RUNTIME_DIR}
 ARG OUTPUT_DIR
 
 COPY --from=build ${OUTPUT_DIR} .
+COPY --from=build /root/lambda-function/staging/output/ output/
 
 RUN ls
 RUN mv ${EXECUTABLE_NAME} bootstrap || true
 RUN ls
-RUN yum remove python3
 
 CMD [ "handler" ]
