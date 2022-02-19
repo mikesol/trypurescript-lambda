@@ -37,9 +37,7 @@ RUN ls
 
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
 
-RUN . ~/.nvm/nvm.sh && nvm install node
-
-RUN cd staging && npm install && npx spago build --purs-args "-g corefn" && cd ..
+RUN . ~/.nvm/nvm.sh && nvm install node && cd staging && npm install && npx spago build --purs-args "-g corefn" && cd ..
 
 RUN python3 gen_externs_array.py
 RUN stack clean --full
