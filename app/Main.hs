@@ -65,7 +65,7 @@ main = do
     Just "compile" -> do
       -- Stop mangled "Compiling ModuleName" text
       IO.hSetBuffering IO.stderr IO.LineBuffering
-      (portString : hostMode : inputGlobs) <- getArgs
+      inputGlobs <- getArgs
       inputFiles <- concat <$> traverse glob inputGlobs
       e <- runExceptT $ do
         modules <- ExceptT $ I.loadAllModules inputFiles
