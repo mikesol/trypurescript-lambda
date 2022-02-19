@@ -9,7 +9,7 @@ SHELL ["/bin/bash", "--rcfile", "~/.profile", "-c"]
 
 USER root
 
-RUN yum -y install wget tar
+RUN yum -y install wget tar ncurses-compat-libs
 
 # ugh, the certificate has been problematic for months
 # holds nose and does...
