@@ -37,9 +37,7 @@ RUN ls
 
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
 
-RUN . ~/.nvm/nvm.sh
-
-RUN nvm install node
+RUN . ~/.nvm/nvm.sh && nvm install node
 
 RUN cd staging && npm install && npx spago build --purs-args "-g corefn" && cd ..
 
