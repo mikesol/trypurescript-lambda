@@ -1,0 +1,10 @@
+cradle:
+  stack:
+    - path: "./src"
+      component: "trypurescript-lambda:lib"
+
+    - path: "./app/Main.hs"
+      component: "trypurescript-lambda:exe:bootstrap"
+
+    - path: "./app/Paths_trypurescript_lambda.hs"
+      component: "trypurescript-lambda:exe:bootstrap"

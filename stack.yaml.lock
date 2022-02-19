@@ -15,9 +15,93 @@ packages:
   original:
     git: https://github.com/dnikolovv/aws-lambda-haskell-runtime.git
     commit: 3a9d26dee8a39fdbe7bd26bc0ec058f904cdf828
+- completed:
+    hackage: purescript-0.14.5@sha256:511f50e7f267b65e1f656cdff9f9665073496efdf4375a3a86aa68496dae7281,18623
+    pantry-tree:
+      size: 121096
+      sha256: 895dfc2fc938d99930f4ad17d1c475baf59efb4ad0c64519dfd09e482db38ff3
+  original:
+    hackage: purescript-0.14.5
+- completed:
+    hackage: purescript-cst-0.4.0.0@sha256:bfe7be3962e83b645a4a8cd1805f31de17db3d3456962e1a2d17016fe5d7f96d,3861
+    pantry-tree:
+      size: 3018
+      sha256: 1681432cc9fa87bc6344e7c604f94a15a016af6e4b7c3519ee035f0f51d90c9c
+  original:
+    hackage: purescript-cst-0.4.0.0
+- completed:
+    hackage: language-javascript-0.7.0.0@sha256:3eab0262b8ac5621936a4beab6a0f97d0e00a63455a8b0e3ac1547b4088dae7d,3898
+    pantry-tree:
+      size: 2244
+      sha256: b0f28d836cb3fbde203fd7318a896c3a20acd8653a905e1950ae2d9a64bccebf
+  original:
+    hackage: language-javascript-0.7.0.0
+- completed:
+    hackage: safe-exceptions-checked-0.1.0@sha256:ae142f284c6b102f0e7606a69a5719f4f72771d9cc353af72fa4484326689100,1603
+    pantry-tree:
+      size: 298
+      sha256: d1f8ba50967547f26cdc37cbc64bdc85af57d856986876a6a5767a61977bc299
+  original:
+    hackage: safe-exceptions-checked-0.1.0@sha256:ae142f284c6b102f0e7606a69a5719f4f72771d9cc353af72fa4484326689100,1603
+- completed:
+    hackage: time-1.9.3@sha256:8f1b5448722a12a952248b356c9eb366e351226543d9086a2da71270522d5f45,5679
+    pantry-tree:
+      size: 6558
+      sha256: a1043c1719491764f0fa37a1fd70d9451080548a41632fee88d8e1b8db4942d6
+  original:
+    hackage: time-1.9.3
+- completed:
+    hackage: text-1.2.4.1@sha256:e12b468008b3c2bbc1f39bd2dcb75ba8f563c65aa5e54ee223b76463a845b6f1,7184
+    pantry-tree:
+      size: 7720
+      sha256: b1fd81329340a9c6eea4e78313d36c6a333a5de6032ec1536ff6c70a4300b46c
+  original:
+    hackage: text-1.2.4.1
+- completed:
+    hackage: containers-0.6.2.1@sha256:550b39286f70c39402a21e61f0f8a8b19e0f2b9270197d8524b8f3cbe4f43ee1,2561
+    pantry-tree:
+      size: 2823
+      sha256: 0463a6f54ce2fcddb0def77c78a013a982f84aa88c923ab1f6ffe3c51aaa0775
+  original:
+    hackage: containers-0.6.2.1
+- completed:
+    hackage: data-default-0.7.1.1@sha256:2804e8d14f521a1edee88b68b66347448e7f3b685868290fdc55930e4471f5a9,645
+    pantry-tree:
+      size: 212
+      sha256: 1db0dcb6890feff1b87ea180a4c4a0611cda399a700822bd75970a2b7ad02dbc
+  original:
+    hackage: data-default-0.7.1.1
+- completed:
+    hackage: bytestring-0.10.12.0@sha256:3756939e46a9adb9cd5654442e7a44f53d0ad94fca8a9ad7029cc28fa6b0a081,6070
+    pantry-tree:
+      size: 2140
+      sha256: 4e979f335e85ccb677f171f1e8e4d1139c8bc4e3ace7fb1fdf9bdffe9b0d9287
+  original:
+    hackage: bytestring-0.10.12.0
+- completed:
+    hackage: mtl-2.2.2@sha256:1050fb71acd9f5d67da7d992583f5bd0eb14407b9dc7acc122af1b738b706ca3,2261
+    pantry-tree:
+      size: 1713
+      sha256: b8bdc2259e2f943a7252fb164805666fe108ac959d398e0af27b43ba2ebc241c
+  original:
+    hackage: mtl-2.2.2
+- completed:
+    hackage: transformers-0.5.6.2@sha256:6c959d14430f4deffb99579ba019de07c3d852a2122b6f449344386c7d75ff1d,3172
+    pantry-tree:
+      size: 2512
+      sha256: c79246ba7d61392c2f214376fed3c2a05e4b2649b93ec2c849a86493f278ace0
+  original:
+    hackage: transformers-0.5.6.2
+- completed:
+    hackage: Glob-0.10.1@sha256:17cbe8f4f023d3288d168f5eb34f9fd1125348ece2682bad2137ed8a06d5d0d6,3108
+    pantry-tree:
+      size: 1432
+      sha256: 7885e347934c02f98e54bd39880c29f697bf268afab0038faa4bc575d0bc7f23
+  original:
+    hackage: Glob-0.10.1
 snapshots:
 - completed:
-    size: 534126
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/16/31.yaml
-    sha256: 637fb77049b25560622a224845b7acfe81a09fdb6a96a3c75997a10b651667f6
-  original: lts-16.31
+    size: 565712
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/17/6.yaml
+    sha256: 4e5e581a709c88e3fe26a9ce8bf331435729bead762fb5c190064c6c5bb1b835
+  original: lts-17.6

@@ -1,4 +1,4 @@
-resolver: lts-16.31
+resolver: lts-17.6
 
 packages:
 - .
@@ -9,7 +9,15 @@ extra-deps:
 - purescript-0.14.5
 - purescript-cst-0.4.0.0
 - language-javascript-0.7.0.0
-
+- safe-exceptions-checked-0.1.0@sha256:ae142f284c6b102f0e7606a69a5719f4f72771d9cc353af72fa4484326689100,1603
+- time-1.9.3
+- text-1.2.4.1
+- containers-0.6.2.1
+- data-default-0.7.1.1
+- bytestring-0.10.12.0
+- mtl-2.2.2
+- transformers-0.5.6.2
+- Glob-0.10.1
 # copied from trypurescript
 # no idea what these do...
 flags:
