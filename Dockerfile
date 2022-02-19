@@ -11,9 +11,13 @@ USER root
 
 RUN yum -y install wget tar ncurses-compat-libs ncurses-devel
 
+RUN ls /lib64/libncurs*
+
+RUN ls /usr/lib/libncurs*
+
 # fixes version issue
 # https://stackoverflow.com/questions/63730439/lib64-libtinfo-so-5-no-version-information-available
-RUN ln -sf /usr/lib/libncursesw.so.6 /lib64/libtinfo.so.5
+RUN ln -sf /lib64/libncursesw.so.6 /lib64/libtinfo.so.5
 
 # ugh, the certificate has been problematic for months
 # holds nose and does...
