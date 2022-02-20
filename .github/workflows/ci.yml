@@ -30,7 +30,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
+      - name: Build ps deps
+        run: cd staging && npm install && npx spago build --purs-args "-g corefn" && cd ..
+      - name: Build corefn list
+        run: python gen_externs_array.py
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
         env:
