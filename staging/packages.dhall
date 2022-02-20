@@ -44,7 +44,7 @@ let additions =
           , "simple-json"
           ]
         , repo = "https://github.com/mikesol/purescript-wags.git"
-        , version = "v0.6.3"
+        , version = "v0.6.9"
         }
       , everythings-better-with-variants =
         { dependencies =
@@ -166,7 +166,7 @@ let additions =
           ]
         , repo =
             "https://github.com/mikesol/purescript-wags-lib.git"
-        , version = "v0.0.74"
+        , version = "v0.0.97"
         }
       }
 
