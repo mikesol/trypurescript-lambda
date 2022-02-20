@@ -9,13 +9,7 @@ SHELL ["/bin/bash", "--rcfile", "~/.profile", "-c"]
 
 USER root
 
-RUN yum -y install wget tar ncurses-compat-libs ncurses-devel
-
-RUN ls /lib64/libncurs*
-
-# fixes version issue
-# https://stackoverflow.com/questions/63730439/lib64-libtinfo-so-5-no-version-information-available
-RUN ln -sf /lib64/libncursesw.so.5 /lib64/libtinfo.so.5
+RUN yum -y install wget tar
 
 # ugh, the certificate has been problematic for months
 # holds nose and does...
@@ -41,11 +35,6 @@ WORKDIR /root/lambda-function/
 
 RUN ls
 
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-
-RUN . ~/.nvm/nvm.sh && nvm install node && cd staging && npm install && npx spago build --purs-args "-g corefn" && cd ..
-
-RUN python3 gen_externs_array.py
 RUN stack clean --full
 RUN stack build
 
@@ -69,7 +58,6 @@ WORKDIR ${LAMBDA_RUNTIME_DIR}
 ARG OUTPUT_DIR
 
 COPY --from=build ${OUTPUT_DIR} .
-COPY --from=build /root/lambda-function/staging/output/ output/
 
 RUN ls
 RUN mv ${EXECUTABLE_NAME} bootstrap || true
