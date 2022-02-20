@@ -64,4 +64,6 @@ RUN ls
 RUN mv ${EXECUTABLE_NAME} bootstrap || true
 RUN ls
 
+RUN yum -y install ncurses-devel ncurses-compat-libs
+
 CMD [ "handler" ]
