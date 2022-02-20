@@ -58,6 +58,7 @@ WORKDIR ${LAMBDA_RUNTIME_DIR}
 ARG OUTPUT_DIR
 
 COPY --from=build ${OUTPUT_DIR} .
+COPY --from=build /root/lambda-function/staging/output output
 
 RUN ls
 RUN mv ${EXECUTABLE_NAME} bootstrap || true

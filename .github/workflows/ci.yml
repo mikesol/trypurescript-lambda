@@ -36,26 +36,6 @@ jobs:
         run: cd staging && npm install && npx spago build --purs-args "-g corefn" && cd ..
       - name: Build corefn list
         run: python gen_externs_array.py
-      - name: Zip layer
-        run: ln -s staging/output lib && zip -r layer.zip lib && rm lib
-      - name: Upload layer to s3
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ${{ env.AWS_REGION }}
-          AWS_DEFAULT_REGION: ${{ env.AWS_REGION }}
-        run: aws s3 cp layer.zip s3://trypurescript/layer.zip
-      - name: Upload lambda layer
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ${{ env.AWS_REGION }}
-          AWS_DEFAULT_REGION: ${{ env.AWS_REGION }}
-        run: aws lambda publish-layer-version --layer-name trypurescript --description "Extern files for trypurescript" --license-info "MIT" --content S3Bucket=trypurescript,S3Key=layer.zip --compatible-runtimes provided.al2 provided
-      - name: Build ps js deps
-        run: cd staging && npm install && npx spago build --purs-args "-g js" && cd ..
-      - name: Do build
-        run: cd staging && cp -r "$PWD/output" "$PWD/../client/public/js/output" && cd ../client && npm install && npm run build:production
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
         env:
@@ -71,16 +51,12 @@ jobs:
           docker tag wags-lambda:latest 201242457561.dkr.ecr.eu-west-1.amazonaws.com/wags-lambda:latest
           aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 201242457561.dkr.ecr.eu-west-1.amazonaws.com
           docker push 201242457561.dkr.ecr.eu-west-1.amazonaws.com/wags-lambda:latest
+      - name: Build ps js deps
+        run: cd staging && npm install && npx spago build --purs-args "-g js" && cd ..
+      - name: Do build
+        run: cd staging && cp -r "$PWD/output" "$PWD/../client/public/js/output" && cd ../client && npm install && npm run build:production
       - name: To netlify
         run: npm install -g netlify && NETLIFY_SITE_ID=${{ secrets.NETLIFY_SITE_ID }} NETLIFY_AUTH_TOKEN=${{ secrets.NETLIFY_AUTH_TOKEN }} netlify deploy --dir=client/public --prod
-      - name: Update function config
-        id: update-function-config
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ${{ env.AWS_REGION }}
-          AWS_DEFAULT_REGION: ${{ env.AWS_REGION }}
-        run: aws lambda update-function-configuration --function-name trypurescript --environment "Variables={PURESCRIPT_OUTPUT_DIR=/opt/lib/}"
       - name: Update function code
         id: update-function-code
         env:
