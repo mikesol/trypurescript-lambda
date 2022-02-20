@@ -3,3 +3,4 @@ build/
 *~
 trypurescript-lambda.cabal
 src/Externs.hs
+client/public/js/output
