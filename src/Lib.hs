@@ -225,13 +225,13 @@ tryParseType = hush . fmap (CST.convertType "<file>") . runParser CST.parseTypeP
 handler :: Input -> Context () -> IO (Either String Output)
 handler ipt context = do
   let code = inputCode ipt
-  lambdaRuntimeDir' <- lookupEnv "LAMBDA_RUNTIME_DIR"
-  case lambdaRuntimeDir' of
+  purescriptOutputDir' <- lookupEnv "PURESCRIPT_OUTPUT_DIR"
+  case purescriptOutputDir' of
     Nothing -> return $ Left "Could not find lambda runtime dir"
-    Just lambdaRuntimeDir -> do
+    Just purescriptOutputDir -> do
       IO.hSetBuffering IO.stderr IO.LineBuffering
       e <- runExceptT $ do
-        exts <- fmap catMaybes $ traverse MMo.readExternsFile (fmap (joinPath . ([lambdaRuntimeDir, "output"] ++) . pure) externFileList)
+        exts <- fmap catMaybes $ traverse MMo.readExternsFile (fmap (joinPath . ([purescriptOutputDir] ++) . pure) externFileList)
         let env = foldl' (flip P.applyExternsFileToEnvironment) P.initEnvironment exts
         namesEnv <- fmap fst . runWriterT $ foldM P.externsEnv P.primEnv exts
         pure (exts, namesEnv, env)
