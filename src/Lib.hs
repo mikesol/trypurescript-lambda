@@ -11,6 +11,7 @@ import GHC.Generics
 import Data.Aeson
 import Aws.Lambda
 
+import qualified Control.Logging as CL
 import System.Environment (lookupEnv)
 import System.FilePath.Posix (joinPath)
 import           System.Environment (getArgs)
@@ -223,7 +224,7 @@ tryParseType = hush . fmap (CST.convertType "<file>") . runParser CST.parseTypeP
 ----------- end copy and paste
 
 handler :: Input -> Context () -> IO (Either String Output)
-handler ipt context = do
+handler ipt context = CL.withStdoutLogging $ do
   let code = inputCode ipt
   lambdaRuntimeDir' <- lookupEnv "LAMBDA_RUNTIME_DIR"
   case lambdaRuntimeDir' of
@@ -238,4 +239,5 @@ handler ipt context = do
       case e of
         Left err -> return (Left (show err))
         Right (exts, namesEnv, env) -> do
+          CL.log $ ("externs length: ") <> (T.pack $ show $ length exts)
           server code exts namesEnv env
