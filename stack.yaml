@@ -1,4 +1,4 @@
-resolver: lts-18.15
+resolver: lts-17.6
 
 packages:
 - .
@@ -6,23 +6,15 @@ packages:
 extra-deps:
 - git: https://github.com/dnikolovv/aws-lambda-haskell-runtime.git
   commit: 3a9d26dee8a39fdbe7bd26bc0ec058f904cdf828
-- git: https://github.com/mikesol/purescript
-  commit: 0c348d73766761cf91c6168011dca7f4279919f8
-- git: https://github.com/mikesol/purescript
-  commit: 0c348d73766761cf91c6168011dca7f4279919f8
-  subdirs:
-    - lib/purescript-cst
+- purescript-0.14.5
+- purescript-cst-0.4.0.0
 - language-javascript-0.7.0.0
 - safe-exceptions-checked-0.1.0@sha256:ae142f284c6b102f0e7606a69a5719f4f72771d9cc353af72fa4484326689100,1603
-- containers-0.6.5.1@sha256:a029734132bb3471f8a91e3deaa095581a97410c405a1c665643053db87d87c1,2596
-- Cabal-3.2.1.0@sha256:8743076ec022296f9771d962000c9ca3a0fe02e68c37b992c63e382a675f791d,27482
-- dlist-1.0@sha256:124cb3aa1decebd5171b46601b1f74cca6cfae12d266ace3799b86dd05ef7cb4,3560
-- parsec-3.1.15.0@sha256:a162d4cc8884014ba35192545cad293af0529fe11497aad8834bbaaa3dfffc26,4429
 - time-1.9.3
 - text-1.2.4.1
+- containers-0.6.2.1
 - data-default-0.7.1.1
 - bytestring-0.10.12.0
-- binary-0.8.9.0
 - mtl-2.2.2
 - transformers-0.5.6.2
 - Glob-0.10.1

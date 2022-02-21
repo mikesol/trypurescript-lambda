@@ -16,29 +16,19 @@ packages:
     git: https://github.com/dnikolovv/aws-lambda-haskell-runtime.git
     commit: 3a9d26dee8a39fdbe7bd26bc0ec058f904cdf828
 - completed:
-    name: purescript
-    version: 0.14.5
-    git: https://github.com/mikesol/purescript
+    hackage: purescript-0.14.5@sha256:511f50e7f267b65e1f656cdff9f9665073496efdf4375a3a86aa68496dae7281,18623
     pantry-tree:
-      size: 129749
-      sha256: 9e8966d7142add7687e3557177fa21bcc26a0f29d8ce3d972ae7973705e3d086
-    commit: 0c348d73766761cf91c6168011dca7f4279919f8
+      size: 121096
+      sha256: 895dfc2fc938d99930f4ad17d1c475baf59efb4ad0c64519dfd09e482db38ff3
   original:
-    git: https://github.com/mikesol/purescript
-    commit: 0c348d73766761cf91c6168011dca7f4279919f8
+    hackage: purescript-0.14.5
 - completed:
-    subdir: lib/purescript-cst
-    name: purescript-cst
-    version: 0.4.0.0
-    git: https://github.com/mikesol/purescript
+    hackage: purescript-cst-0.4.0.0@sha256:bfe7be3962e83b645a4a8cd1805f31de17db3d3456962e1a2d17016fe5d7f96d,3861
     pantry-tree:
       size: 3018
-      sha256: 72fc85025dc8a485cff2cec7f35a0848f51cac2a36c498bcc8e7f79187f799a4
-    commit: 0c348d73766761cf91c6168011dca7f4279919f8
+      sha256: 1681432cc9fa87bc6344e7c604f94a15a016af6e4b7c3519ee035f0f51d90c9c
   original:
-    subdir: lib/purescript-cst
-    git: https://github.com/mikesol/purescript
-    commit: 0c348d73766761cf91c6168011dca7f4279919f8
+    hackage: purescript-cst-0.4.0.0
 - completed:
     hackage: language-javascript-0.7.0.0@sha256:3eab0262b8ac5621936a4beab6a0f97d0e00a63455a8b0e3ac1547b4088dae7d,3898
     pantry-tree:
@@ -54,34 +44,6 @@ packages:
   original:
     hackage: safe-exceptions-checked-0.1.0@sha256:ae142f284c6b102f0e7606a69a5719f4f72771d9cc353af72fa4484326689100,1603
 - completed:
-    hackage: containers-0.6.5.1@sha256:a029734132bb3471f8a91e3deaa095581a97410c405a1c665643053db87d87c1,2596
-    pantry-tree:
-      size: 2823
-      sha256: 86234e3221f6fa50e82d860a8428005ac3ff19fea92103ff79a3047cd5cd1625
-  original:
-    hackage: containers-0.6.5.1@sha256:a029734132bb3471f8a91e3deaa095581a97410c405a1c665643053db87d87c1,2596
-- completed:
-    hackage: Cabal-3.2.1.0@sha256:8743076ec022296f9771d962000c9ca3a0fe02e68c37b992c63e382a675f791d,27482
-    pantry-tree:
-      size: 41224
-      sha256: 92682a2aab8d967de341acff88525376eb9a31f53f094e0878c51c2886564f3a
-  original:
-    hackage: Cabal-3.2.1.0@sha256:8743076ec022296f9771d962000c9ca3a0fe02e68c37b992c63e382a675f791d,27482
-- completed:
-    hackage: dlist-1.0@sha256:124cb3aa1decebd5171b46601b1f74cca6cfae12d266ace3799b86dd05ef7cb4,3560
-    pantry-tree:
-      size: 953
-      sha256: 8467afe9c94b2756e5703fed0950b51418bd877acbdd72e9dc3488b8f28f4e82
-  original:
-    hackage: dlist-1.0@sha256:124cb3aa1decebd5171b46601b1f74cca6cfae12d266ace3799b86dd05ef7cb4,3560
-- completed:
-    hackage: parsec-3.1.15.0@sha256:a162d4cc8884014ba35192545cad293af0529fe11497aad8834bbaaa3dfffc26,4429
-    pantry-tree:
-      size: 2630
-      sha256: cbddc1e3c5ada6925354850cc0a8fadcd8643689098a504a0ed25ef9e0b932b8
-  original:
-    hackage: parsec-3.1.15.0@sha256:a162d4cc8884014ba35192545cad293af0529fe11497aad8834bbaaa3dfffc26,4429
-- completed:
     hackage: time-1.9.3@sha256:8f1b5448722a12a952248b356c9eb366e351226543d9086a2da71270522d5f45,5679
     pantry-tree:
       size: 6558
@@ -96,6 +58,13 @@ packages:
   original:
     hackage: text-1.2.4.1
 - completed:
+    hackage: containers-0.6.2.1@sha256:550b39286f70c39402a21e61f0f8a8b19e0f2b9270197d8524b8f3cbe4f43ee1,2561
+    pantry-tree:
+      size: 2823
+      sha256: 0463a6f54ce2fcddb0def77c78a013a982f84aa88c923ab1f6ffe3c51aaa0775
+  original:
+    hackage: containers-0.6.2.1
+- completed:
     hackage: data-default-0.7.1.1@sha256:2804e8d14f521a1edee88b68b66347448e7f3b685868290fdc55930e4471f5a9,645
     pantry-tree:
       size: 212
@@ -109,13 +78,6 @@ packages:
       sha256: 4e979f335e85ccb677f171f1e8e4d1139c8bc4e3ace7fb1fdf9bdffe9b0d9287
   original:
     hackage: bytestring-0.10.12.0
-- completed:
-    hackage: binary-0.8.9.0@sha256:9cac9a1d86bfa3e7f75cc8bffaa256f3967ebb6d76f67a42f9679384c5c5e18a,6523
-    pantry-tree:
-      size: 1976
-      sha256: 61308af6be2cdb6ba09390d35f3fa1ebb45e3af688bf04922658532398eaa276
-  original:
-    hackage: binary-0.8.9.0
 - completed:
     hackage: mtl-2.2.2@sha256:1050fb71acd9f5d67da7d992583f5bd0eb14407b9dc7acc122af1b738b706ca3,2261
     pantry-tree:
@@ -167,7 +129,7 @@ packages:
     hackage: lift-generics-0.2.1
 snapshots:
 - completed:
-    size: 586286
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/18/15.yaml
-    sha256: 2c9cb11d7aa0656bf28672dcb2414ab21e3ba9ea83ca170c216b2c2fc7e55856
-  original: lts-18.15
+    size: 565712
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/17/6.yaml
+    sha256: 4e5e581a709c88e3fe26a9ce8bf331435729bead762fb5c190064c6c5bb1b835
+  original: lts-17.6
