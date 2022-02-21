@@ -220,15 +220,7 @@ tryParseType = hush . fmap (CST.convertType "<file>") . runParser CST.parseTypeP
         . CST.lexTopLevel
 ----------- end copy and paste
 
-handler :: [P.ExternsFile] -> P.Env -> P.Environment -> ApiGatewayRequest Input -> Context () -> IO (Either (ApiGatewayResponse String) (ApiGatewayResponse Output))
+handler :: [P.ExternsFile] -> P.Env -> P.Environment -> Input -> Context () -> IO (Either String Output)
 handler externs initNamesEnv initEnv ipt context = do
-  let code' = fmap inputCode (apiGatewayRequestBody ipt)
-  case code' of
-    Just code -> do
-      res <- server code externs initNamesEnv initEnv
-      case res of
-        Left err ->
-          pure $ Left $ mkApiGatewayResponse 500 [("Content-Type", "text/plain")] err
-        Right success -> do
-          pure $ Right $ mkApiGatewayResponse 200 [("Content-Type", "application/json")] success
-    Nothing -> pure $ Left $ mkApiGatewayResponse 500 [] "Could not parse body"
+  let code = inputCode ipt
+  server code externs initNamesEnv initEnv

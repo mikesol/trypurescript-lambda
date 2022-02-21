@@ -80,4 +80,4 @@ main = do
             defaultDispatcherOptions
             (pure ())
             id
-            (addAPIGatewayHandler "handler" (Lib.handler exts namesEnv env))
+            (addStandaloneLambdaHandler "handler" (Lib.handler exts namesEnv env))
