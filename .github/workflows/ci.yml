@@ -30,8 +30,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Install jq
-        run: apt-get install -y jq
       - name: Install AWS SDK
         run: npm install aws
       - name: Build ps corefn deps

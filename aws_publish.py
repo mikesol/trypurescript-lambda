@@ -16,13 +16,5 @@ client.update_function_code(FunctionName="trypurescript",
 wait_till_updated()
 newVersion = client.publish_version(FunctionName="trypurescript")['Version']
 wait_till_updated()
-currency_configs = client.list_provisioned_concurrency_configs(
-    FunctionName='trypurescript')['ProvisionedConcurrencyConfigs']
+client.update_alias(FunctionName='trypurescript',Name='wags',FunctionVersion=newVersion)
 wait_till_updated()
-print('new version', newVersion)
-for c in currency_configs:
-  print('deleting', c['FunctionArn'])
-  client.delete_provisioned_concurrency_config(
-      FunctionName='trypurescript', Qualifier=c['FunctionArn'].split(':')[-1])
-  wait_till_updated()
-client.put_provisioned_concurrency_config(FunctionName='trypurescript', Qualifier=newVersion, ProvisionedConcurrentExecutions=10)
