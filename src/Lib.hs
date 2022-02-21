@@ -1,4 +1,3 @@
-
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE LambdaCase #-}
@@ -223,21 +222,7 @@ tryParseType = hush . fmap (CST.convertType "<file>") . runParser CST.parseTypeP
         . CST.lexTopLevel
 ----------- end copy and paste
 
-handler :: Input -> Context () -> IO (Either String Output)
-handler ipt context = CL.withStdoutLogging $ do
+handler :: [P.ExternsFile] -> P.Env -> P.Environment -> Input -> Context () -> IO (Either String Output)
+handler externs initNamesEnv initEnv ipt context = CL.withStdoutLogging $ do
   let code = inputCode ipt
-  lambdaRuntimeDir' <- lookupEnv "LAMBDA_RUNTIME_DIR"
-  case lambdaRuntimeDir' of
-    Nothing -> return $ Left "Could not find lambda runtime dir"
-    Just lambdaRuntimeDir -> do
-      IO.hSetBuffering IO.stderr IO.LineBuffering
-      e <- runExceptT $ do
-        exts <- fmap catMaybes $ traverse MMo.readExternsFile (fmap (joinPath . ([lambdaRuntimeDir, "output"] ++) . pure) externFileList)
-        lift $ CL.log $ ("externs length: ") <> (T.pack $ show $ length exts)
-        let env = foldl' (flip P.applyExternsFileToEnvironment) P.initEnvironment exts
-        namesEnv <- fmap fst . runWriterT $ foldM P.externsEnv P.primEnv exts
-        pure (exts, namesEnv, env)
-      case e of
-        Left err -> return (Left (show err))
-        Right (exts, namesEnv, env) -> do
-          server code exts namesEnv env
+  server code externs initNamesEnv initEnv
