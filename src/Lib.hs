@@ -239,7 +239,7 @@ textPlain = M.singleton "Content-Type" "text/plain"
 handler :: [P.ExternsFile] -> P.Env -> P.Environment -> FauxInput -> Context () -> IO (Either FauxOutput FauxOutput)
 handler externs initNamesEnv initEnv ipt context = do
   let code'' = body ipt
-  let code' = decode (fromString $ T.unpack code'')
+  let code' = fmap inputCode (decode (fromString $ T.unpack code''))
   case code' of
       Just code -> do
         res <- server code externs initNamesEnv initEnv
