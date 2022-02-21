@@ -15,7 +15,6 @@ import GHC.Generics
 import Data.Aeson
 import Externs (externFileList)
 
-import qualified Control.Logging as CL
 import System.Environment (lookupEnv)
 import System.FilePath.Posix (joinPath)
 import           System.Environment (getArgs)
@@ -71,7 +70,6 @@ main = do
       IO.hSetBuffering IO.stderr IO.LineBuffering
       e <- runExceptT $ do
         exts <- fmap catMaybes $ traverse MMo.readExternsFile (fmap (joinPath . ([lambdaRuntimeDir, "output"] ++) . pure) externFileList)
-        lift $ CL.log $ ("externs length: ") <> (T.pack $ show $ length exts)
         let env = foldl' (flip P.applyExternsFileToEnvironment) P.initEnvironment exts
         namesEnv <- fmap fst . runWriterT $ foldM P.externsEnv P.primEnv exts
         pure (exts, namesEnv, env)

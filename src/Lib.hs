@@ -10,7 +10,6 @@ import GHC.Generics
 import Data.Aeson
 import Aws.Lambda
 
-import qualified Control.Logging as CL
 import System.Environment (lookupEnv)
 import System.FilePath.Posix (joinPath)
 import           System.Environment (getArgs)
@@ -56,7 +55,6 @@ import qualified Language.PureScript.Make.Monad as MMo
 import qualified Language.PureScript.Make.Cache as Cache
 import qualified Language.PureScript.TypeChecker.TypeSearch as TS
 --
-import Externs (externFileList)
 
 data Input = Input
   { inputCode :: Text
@@ -223,6 +221,6 @@ tryParseType = hush . fmap (CST.convertType "<file>") . runParser CST.parseTypeP
 ----------- end copy and paste
 
 handler :: [P.ExternsFile] -> P.Env -> P.Environment -> Input -> Context () -> IO (Either String Output)
-handler externs initNamesEnv initEnv ipt context = CL.withStdoutLogging $ do
+handler externs initNamesEnv initEnv ipt context = do
   let code = inputCode ipt
   server code externs initNamesEnv initEnv
