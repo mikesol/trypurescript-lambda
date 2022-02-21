@@ -10,6 +10,7 @@ import GHC.Generics
 import Data.Aeson
 import Aws.Lambda
 
+import Data.ByteString.Lazy.UTF8 (toString, fromString)
 import System.Environment (lookupEnv)
 import System.FilePath.Posix (joinPath)
 import           System.Environment (getArgs)
@@ -56,6 +57,10 @@ import qualified Language.PureScript.Make.Cache as Cache
 import qualified Language.PureScript.TypeChecker.TypeSearch as TS
 --
 
+data FauxInput = FauxInput
+  { body :: Text
+  } deriving (Generic, Show)
+
 data Input = Input
   { inputCode :: Text
   } deriving (Generic)
@@ -67,6 +72,7 @@ data Output = OutputSuccess
   { outputError :: Error }  deriving (Generic)
 
 instance FromJSON Input
+instance FromJSON FauxInput
 
 instance ToJSON Output where
     -- this generates a Value
@@ -76,6 +82,11 @@ instance ToJSON Output where
     -- this encodes directly to a bytestring Builder
     toJSON (OutputFailure err) =
         object ["error" .= err]
+
+instance ToJSON FauxOutput where
+    -- this generates a Value
+    toJSON (FauxOutput statusCode headers body) =
+        object ["statusCode" .= statusCode, "headers" .= headers, "body" .= body]
 
 ----------- copy and paste
 type JS = Text
@@ -220,7 +231,19 @@ tryParseType = hush . fmap (CST.convertType "<file>") . runParser CST.parseTypeP
         . CST.lexTopLevel
 ----------- end copy and paste
 
-handler :: [P.ExternsFile] -> P.Env -> P.Environment -> Input -> Context () -> IO (Either String Output)
+data FauxOutput = FauxOutput { fauxOutputStatusCode :: Int, fauxOutputHeaders :: M.Map String String, fauxOutputBody :: Text }
+
+applicationJson = M.singleton "Content-Type" "application/json"
+textPlain = M.singleton "Content-Type" "text/plain"
+
+handler :: [P.ExternsFile] -> P.Env -> P.Environment -> FauxInput -> Context () -> IO (Either FauxOutput FauxOutput)
 handler externs initNamesEnv initEnv ipt context = do
-  let code = inputCode ipt
-  server code externs initNamesEnv initEnv
+  let code'' = body ipt
+  let code' = decode (fromString $ T.unpack code'')
+  case code' of
+      Just code -> do
+        res <- server code externs initNamesEnv initEnv
+        case res of
+          Right good -> pure $ Right (FauxOutput 200 applicationJson (T.pack $ toString $ encode good))
+          Left bad -> pure $ Left (FauxOutput 400 textPlain (T.pack bad))
+      Nothing -> pure $ Left (FauxOutput 400 textPlain "Could not parse body")
