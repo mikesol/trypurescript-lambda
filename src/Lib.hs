@@ -231,4 +231,4 @@ handler externs initNamesEnv initEnv ipt context = do
           pure $ Left $ mkApiGatewayResponse 500 [("Content-Type", "text/plain")] err
         Right success -> do
           pure $ Right $ mkApiGatewayResponse 200 [("Content-Type", "application/json")] success
-    Nothing -> pure $ Left $ mkApiGatewayResponse 500 [("Content-Type", "text/plain")] "Could not parse body"
+    Nothing -> pure $ Left $ mkApiGatewayResponse 500 [] "Could not parse body"
