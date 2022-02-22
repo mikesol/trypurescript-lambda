@@ -57,13 +57,9 @@ import qualified Language.PureScript.Make.Cache as Cache
 import qualified Language.PureScript.TypeChecker.TypeSearch as TS
 --
 
-data FauxInput = FauxInput
+data APIGatewayInput = APIGatewayInput
   { body :: Text
   } deriving (Generic, Show)
-
-data Input = Input
-  { inputCode :: Text
-  } deriving (Generic)
 
 data Output = OutputSuccess
   { outputJS :: Text
@@ -71,8 +67,7 @@ data Output = OutputSuccess
   } | OutputFailure
   { outputError :: Error }  deriving (Generic)
 
-instance FromJSON Input
-instance FromJSON FauxInput
+instance FromJSON APIGatewayInput
 
 instance ToJSON Output where
     -- this generates a Value
@@ -83,9 +78,9 @@ instance ToJSON Output where
     toJSON (OutputFailure err) =
         object ["error" .= err]
 
-instance ToJSON FauxOutput where
+instance ToJSON APIGatewayOutput where
     -- this generates a Value
-    toJSON (FauxOutput statusCode headers body) =
+    toJSON (APIGatewayOutput statusCode headers body) =
         object ["statusCode" .= statusCode, "headers" .= headers, "body" .= body]
 
 ----------- copy and paste
@@ -231,19 +226,15 @@ tryParseType = hush . fmap (CST.convertType "<file>") . runParser CST.parseTypeP
         . CST.lexTopLevel
 ----------- end copy and paste
 
-data FauxOutput = FauxOutput { fauxOutputStatusCode :: Int, fauxOutputHeaders :: M.Map String String, fauxOutputBody :: Text }
+data APIGatewayOutput = APIGatewayOutput { fauxOutputStatusCode :: Int, fauxOutputHeaders :: M.Map String String, fauxOutputBody :: Text }
 
 applicationJson = M.singleton "Content-Type" "application/json"
 textPlain = M.singleton "Content-Type" "text/plain"
 
-handler :: [P.ExternsFile] -> P.Env -> P.Environment -> FauxInput -> Context () -> IO (Either FauxOutput FauxOutput)
+handler :: [P.ExternsFile] -> P.Env -> P.Environment -> APIGatewayInput -> Context () -> IO (Either APIGatewayOutput APIGatewayOutput)
 handler externs initNamesEnv initEnv ipt context = do
-  let code'' = body ipt
-  let code' = fmap inputCode (decode (fromString $ T.unpack code''))
-  case code' of
-      Just code -> do
-        res <- server code externs initNamesEnv initEnv
-        case res of
-          Right good -> pure $ Right (FauxOutput 200 applicationJson (T.pack $ toString $ encode good))
-          Left bad -> pure $ Left (FauxOutput 400 textPlain (T.pack bad))
-      Nothing -> pure $ Left (FauxOutput 400 textPlain "Could not parse body")
+  let code = body ipt
+  res <- server code externs initNamesEnv initEnv
+  case res of
+    Right good -> pure $ Right (APIGatewayOutput 200 applicationJson (T.pack $ toString $ encode good))
+    Left bad -> pure $ Left (APIGatewayOutput 400 textPlain (T.pack bad))
