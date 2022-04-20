@@ -56,6 +56,8 @@ ts = g.topologicalSort()
 #print(len(ts), len(o))
 o = [ks[x]+'/externs.cbor' for x in ts]
 
+print(o)
+
 with open('src/Externs.hs', 'w') as externs:
     externs.write("""module Externs(externFileList) where
 
