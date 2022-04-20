@@ -18,7 +18,7 @@ RUN wget --no-check-certificate https://get.haskellstack.org/stable/linux-x86_64
 
 RUN tar zxf linux-x86_64.tar.gz
 
-RUN cp stack-2.7.3-linux-x86_64/stack /usr/bin
+RUN cp stack-2.7.5-linux-x86_64/stack /usr/bin
 
 RUN yum -y install perl make automake gcc gmp-devel libffi zlib zlib-devel xz tar git gnupg python3
 
