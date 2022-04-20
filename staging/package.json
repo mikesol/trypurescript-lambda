@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "purescript": "^0.14.5",
+    "purescript": "^0.14.9",
     "spago": "^0.20.3"
   }
 }
